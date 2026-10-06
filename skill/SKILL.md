@@ -397,7 +397,21 @@ export class Visual implements IVisual {
 
 ---
 
-## 7. Build & Packaging Commands
+## 8. Domain Playbook: Telecom / Last-Mile Access Cost Analytics (OINIS)
+
+In enterprise data analytics scenarios (e.g., Orange Business OINIS last-mile off-net telecom circuits), the visualizers map directly to specific financial and infrastructure questions:
+
+| Visual Template | Telecom & Access Cost Business Case | Field Mappings |
+|---|---|---|
+| **Savings Waterfall (`savingsDelta`)** | Demonstrates net savings from renegotiations, disconnects, migrations, and MRC price reductions over time. | Category: `Saving_Type` / `Month`<br>Measure: `Monthly_Savings_EUR` |
+| **Carrier City 3D (`dataCity`)** | Compares supplier spend across local telco carriers. Districts = Countries/Regions, Buildings = Carriers, Height = MRC Spend, Dark Windows = Inactive/Unmatched circuits still being billed. | Zone: `Country` or `Carrier_Tier`<br>Height: `MRC`<br>Width: `Circuit_Count` |
+| **Circuit Network Web (`networkWeb`)** | Visualizes mesh connectivity between Customer Sites, Orange PoPs, and Carrier Interconnects with link thickness reflecting bandwidth or MRC. | Source: `PoP_Location`<br>Target: `Customer_Site`<br>Weight: `Bandwidth_Mbps` |
+| **Contract Orbit Radar (`solarSystem`)** | Displays contracts orbiting carrier hubs; distance and color shift toward red as auto-renewal / contract expiry dates approach. | Planet: `Carrier`<br>Moon: `Circuit_ID`<br>Radius: `MRC` |
+| **Last-Mile Globe 3D (`hologramGlobe`)** | Visualizes geographic spread of off-net circuits with arcs connecting PoPs to customer endpoints colored by circuit status (Active, Pending, Upgrade). | Source Lat/Long: PoP<br>Dest Lat/Long: Site |
+
+---
+
+## 9. Build & Packaging Commands
 
 ```bash
 # Package a single visual with certification fixes:
@@ -408,3 +422,4 @@ npx pbiviz package --certification-fix
 npm run build:all
 ```
 All packaged `.pbiviz` files are generated in `dist/` ready for direct import into Power BI Desktop or Service.
+
