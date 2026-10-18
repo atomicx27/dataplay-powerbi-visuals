@@ -433,6 +433,20 @@ In enterprise data analytics scenarios (e.g., Orange Business OINIS last-mile of
 | **Contract Orbit Radar (`solarSystem`)** | Displays contracts orbiting carrier hubs; distance and color shift toward red as auto-renewal / contract expiry dates approach. | Planet: `Carrier`<br>Moon: `Circuit_ID`<br>Radius: `MRC` |
 | **Last-Mile Globe 3D (`hologramGlobe`)** | Visualizes geographic spread of off-net circuits with arcs connecting PoPs to customer endpoints colored by circuit status (Active, Pending, Upgrade). | Source Lat/Long: PoP<br>Dest Lat/Long: Site |
 
+### 8.1 Carbon Footprint & ESG Analytics Suite (`carbon-visuals/`)
+
+Dedicated domain visualizers for telecom circuit emissions and supplier decarbonization:
+
+| Visual | ESG Analytics Focus | Key Mechanics & Mappings |
+|---|---|---|
+| **Carbon Atlas (`carbonAtlas`)** | Global geographic emission heatmap with country plumes. | Mercator map, emission density scales, graticule lines, interactive year playback timeline (`Country`, `Carbon Emission`, `Year`). |
+| **Carrier Constellation (`carrierConstellation`)** | Supplier carbon gravitational network. | Force-directed graph with carrier gravity nodes linking multi-country operations (`Country`, `Carrier`, `Carbon Emission`). |
+| **Circuit Flowers (`circuitFlowers`)** | Glyphic multi-metric efficiency composition. | Flower petals representing distinct circuit types (`Ethernet`, `MPLS`, `DIA`) and center radius representing carbon intensity. |
+| **Efficiency Orbit (`efficiencyOrbit`)** | Quadrant efficiency scatter with motion trails. | Plots Circuit Volume (X) vs Carbon (Y) across reporting years with historical orbital trails. |
+| **Emission Ribbons (`emissionRibbons`)** | Bump chart for ranking trajectory shifts. | Tracks year-over-year climb/fall of highest emitting countries or carriers over time. |
+| **Carbon Flow (`carbonFlow`)** | Alluvial Sankey distribution flow. | Traces footprint allocation across hierarchy: Region &rarr; Country &rarr; Telecom Carrier. |
+| **Carbon Globe 3D (`carbonGlobe3d`)** | Spherical 3D WebGL Earth visualization. | Extruded carbon pillar columns on landmass coordinates with inter-country carrier connection arcs. |
+
 ---
 
 ## 9. Build & Packaging Commands

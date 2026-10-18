@@ -1,11 +1,14 @@
-# Data Play — Power BI Custom Visuals
+# Data Play & Carbon Suite — Power BI Custom Visuals
 
-A comprehensive collection of **13 interactive custom visuals for Power BI**, ported from the **Data Play** web app.
-All visuals are pre-packaged as `.pbiviz` files ready to import directly into Power BI Desktop or the Power BI Service without compiling or external dependencies.
+A comprehensive repository of **20 production-ready, interactive custom visuals for Power BI**, organized into two dedicated suites:
+1. **Data Play Suite (`visuals/`)**: 13 general-purpose interactive visualizers ported from the Data Play web application.
+2. **Carbon Emission Suite (`carbon-visuals/`)**: 7 domain-specific visualizers designed for Telecom Circuit Analytics, Carrier Gravity, and Carbon Footprint (CO2e) Tracking.
+
+All visuals are pre-compiled and packaged as standalone `.pbiviz` files ready to import directly into Power BI Desktop or the Power BI Service. Zero external network requests or dependencies required.
 
 ---
 
-## 📦 Packaged Custom Visuals (`visuals/`)
+## 📦 1. Data Play Visuals (`visuals/`)
 
 | Visual | File | Description & Capabilities |
 |---|---|---|
@@ -25,14 +28,30 @@ All visuals are pre-packaged as `.pbiviz` files ready to import directly into Po
 
 ---
 
+## 🌿 2. Carbon Emission & Telecom Suite (`carbon-visuals/`)
+
+A specialized suite of 7 visuals designed for **Telecom Circuit Analytics and Carbon Emission Tracking**:
+
+| Visual Name | File | Description & Capabilities |
+|---|---|---|
+| 🗺️ **Carbon Atlas** | [`carbon-visuals/carbonAtlas.pbiviz`](carbon-visuals/carbonAtlas.pbiviz) | Interactive 2D Mercator world map with country emission plumes, heat color scaling, graticule lines, zoom/pan, and year timeline. |
+| 🛰️ **Carrier Constellation** | [`carbon-visuals/carrierConstellation.pbiviz`](carbon-visuals/carrierConstellation.pbiviz) | D3 force-directed network diagram exposing shared telecom carriers operating across countries, weighted by carbon gravity. |
+| 🌸 **Circuit Flowers** | [`carbon-visuals/circuitFlowers.pbiviz`](carbon-visuals/circuitFlowers.pbiviz) | Multi-dimensional glyph matrix displaying circuit type compositions (petals) and carbon intensity efficiency per country/carrier. |
+| 🪐 **Efficiency Orbit** | [`carbon-visuals/efficiencyOrbit.pbiviz`](carbon-visuals/efficiencyOrbit.pbiviz) | Animated quadrant scatter orbit plotting Circuit Count (X) against Carbon (Y) with historical motion trails over time. |
+| 🎀 **Emission Ribbons** | [`carbon-visuals/emissionRibbons.pbiviz`](carbon-visuals/emissionRibbons.pbiviz) | Year-over-year bump ribbon chart tracking how country carbon emission rankings climb or fall over historical periods. |
+| 🌊 **Carbon Flow** | [`carbon-visuals/carbonFlow.pbiviz`](carbon-visuals/carbonFlow.pbiviz) | Alluvial Sankey flow diagram breaking down carbon footprints through Region → Country → Telecom Carrier. |
+| 🌍 **Carbon Globe 3D** | [`carbon-visuals/carbonGlobe3d.pbiviz`](carbon-visuals/carbonGlobe3d.pbiviz) | Holographic 3D WebGL Earth globe with extruded carbon pillars, auto-rotation, and inter-country carrier mesh connection arcs. |
+
+---
+
 ## ⬇️ Download
 
-- **Single visual:** Open any `.pbiviz` file in the [`visuals/`](visuals/) folder and click **Download raw file**.
-- **All visuals:** Clone this repository or use GitHub Releases:
+- **Single visual:** Open any `.pbiviz` file in [`visuals/`](visuals/) or [`carbon-visuals/`](carbon-visuals/) and click **Download raw file**.
+- **Clone full repository:**
   ```bash
   git clone https://github.com/atomicx27/dataplay-powerbi-visuals.git
   ```
-  or download via GitHub CLI:
+- **Download via GitHub CLI:**
   ```bash
   gh release download --repo atomicx27/dataplay-powerbi-visuals --pattern "*.pbiviz"
   ```
@@ -44,8 +63,8 @@ All visuals are pre-packaged as `.pbiviz` files ready to import directly into Po
 ### Power BI Desktop
 1. In the **Visualizations** pane, click the **`…`** (Get more visuals) icon.
 2. Select **Import a visual from a file**.
-3. Pick your desired `.pbiviz` file from the `visuals/` directory and accept the prompt.
-4. The custom visual icon will appear in the Visualizations pane. Click it to add it to your report canvas.
+3. Pick your desired `.pbiviz` file (from `visuals/` or `carbon-visuals/`) and accept the prompt.
+4. The visual icon will appear in the Visualizations pane. Click it to add it to your report canvas.
 
 ### Power BI Service (app.powerbi.com)
 1. Open a report in **Edit** mode.
@@ -53,21 +72,29 @@ All visuals are pre-packaged as `.pbiviz` files ready to import directly into Po
 3. Upload the `.pbiviz` file.
 
 > [!NOTE]
-> If your tenant restricts third-party visuals, a Power BI administrator can enable them in **Admin portal → Tenant settings → Allow visuals created using the Power BI SDK**, or deploy them directly to your **Organizational visuals** library.
+> If your tenant restricts third-party visuals, an administrator can allow them under **Admin portal → Tenant settings → Allow visuals created using the Power BI SDK**, or deploy them to your **Organizational visuals** repository.
 
 ---
 
 ## 🧩 Field Wells & Usage Highlights
 
+### 🌿 Carbon Suite Standard Data Role Mappings
+| Field Well | Data Type | Purpose |
+|---|---|---|
+| **Country** | Text (Grouping) | Matches world coordinates and country boundaries automatically. |
+| **Region** | Text (Grouping) | Global region (EMEA, Americas, APAC, MEA). |
+| **Carrier** | Text (Grouping) | Telecom carrier / supplier name. |
+| **Year** | Number / Date | Historical reporting year. Triggers the interactive **Play / Scrub Timeline**. |
+| **Carbon Emission** | Measure | Total carbon footprint metric (e.g. CO2e kg/tonnes). |
+| **Circuit Types** | Measures | Multiple columns (`Ethernet`, `MPLS`, `DIA`, `Broadband`). |
+
 ### 🫧 Bubble Physics
 | Field Well | Type | Purpose |
 |---|---|---|
-| **Color group** | Category (Grouping) | Assigns cluster color and grouping forces. |
-| **Details** | Category (Grouping, up to 3) | Generates unique individual bubbles. |
+| **Color group** | Category | Assigns cluster color and grouping forces. |
+| **Details** | Category (up to 3) | Generates unique individual bubbles. |
 | **Bubble size** | Measure | Sets bubble radius (square-root scaled). |
-| **Tooltips** | Measures (up to 10) | Metrics displayed on hover. |
-
-*Format Pane: Max bubbles, Min/Max radius, Center gravity, Category labels, Burst animation.*
+| **Tooltips** | Measures | Metrics displayed on hover. |
 
 ### 🏙️ Data City (3D)
 | Field Well | Type | Purpose |
@@ -77,8 +104,6 @@ All visuals are pre-packaged as `.pbiviz` files ready to import directly into Po
 | **Building width** | Measure | Footprint width of the building. |
 | **Tooltips** | Measures | Hover detail cards. |
 
-*Controls: Left-drag to orbit, right-drag to pan, wheel to zoom, click to cross-filter.*
-
 ### 🕸️ Network Web
 | Field Well | Type | Purpose |
 |---|---|---|
@@ -86,29 +111,6 @@ All visuals are pre-packaged as `.pbiviz` files ready to import directly into Po
 | **Target node** | Category | Destination node of the connection. |
 | **Link weight** | Measure | Link thickness and connection strength. |
 | **Tooltips** | Measures | Metrics on link or node hover. |
-
-*Format Pane: Max connections, Link distance, Repulsion force, Node labels.*
-
-### 📉 Dual-Month Savings Web (`savingsDelta`)
-| Field Well | Type | Purpose |
-|---|---|---|
-| **Category** | Category | Item, supplier, or account category. |
-| **Last Month** | Measure | Previous reporting period amount. |
-| **This Month** | Measure | Current reporting period amount. |
-| **Tooltips** | Measures | Additional variance breakdown fields. |
-
-### 🌐 Hologram Globe 3D (`hologramGlobe`)
-| Field Well | Type | Purpose |
-|---|---|---|
-| **Location / City** | Category | Geo name or coordinate pair. |
-| **Metric Value** | Measure | Extruded pillar height on the globe. |
-| **Category** | Category | Color coding for pillars and arcs. |
-
-### 🎨 Shared Appearance Card (All Visuals)
-- **Palette Modes:** Data Play Neon, Report Theme, or High-Contrast Rainbow.
-- **Dark Mode Background:** Toggles dark glassmorphism background.
-- **Selection & Cross-filtering:** Fully synchronized with native Power BI slicers.
-- **High-contrast Accessibility:** Inherits Windows/Power BI high-contrast themes automatically.
 
 ---
 
@@ -119,6 +121,7 @@ All visuals are pre-packaged as `.pbiviz` files ready to import directly into Po
 | **Left Click** | Selects data point and cross-filters all other visuals on page. |
 | **Ctrl / Shift + Click** | Multi-selects items. |
 | **Legend Click** | Selects all data points in the selected category. |
+| **Timeline Play/Scrub** | Steps through historical years (Carbon Suite visuals). |
 | **Canvas Empty Click** | Clears active selection. |
 | **Right Click** | Opens native Power BI context menu (drill-through, include/exclude). |
 | **Mouse Drag** | Moves bubbles/nodes or orbits/pans 3D WebGL scenes. |
@@ -132,6 +135,7 @@ The [`skill/SKILL.md`](skill/SKILL.md) file contains the full engineering playbo
 - Monorepo architectural patterns with shared capability schemas, palettes, and data parsers.
 - WebGL lifecycle, context disposal, and sandboxed memory management.
 - Complete catalog of sandbox certification rules and debugging fixes.
+- Domain playbooks for Telecom & Carbon analytics.
 
 To use the skill with an AI coding assistant, copy `skill/SKILL.md` into your agent skills path (e.g. `~/.gemini/config/skills/powerbi-custom-visuals/`).
 
