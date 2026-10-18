@@ -1,18 +1,21 @@
 # Data Play & Carbon Suite — Power BI Custom Visuals
 
-A comprehensive repository of **20 production-ready, interactive custom visuals for Power BI**, organized into two dedicated suites:
-1. **Data Play Suite (`visuals/`)**: 13 general-purpose interactive visualizers ported from the Data Play web application.
+A comprehensive repository of **23 production-ready, interactive custom visuals for Power BI**, organized into two dedicated suites:
+1. **Data Play & Executive Plus Suite (`visuals/`)**: 16 interactive visualizers and executive analytics charts.
 2. **Carbon Emission Suite (`carbon-visuals/`)**: 7 domain-specific visualizers designed for Telecom Circuit Analytics, Carrier Gravity, and Carbon Footprint (CO2e) Tracking.
 
 All visuals are pre-compiled and packaged as standalone `.pbiviz` files ready to import directly into Power BI Desktop or the Power BI Service. Zero external network requests or dependencies required.
 
 ---
 
-## 📦 1. Data Play Visuals (`visuals/`)
+## 📦 1. Data Play & Executive Plus Visuals (`visuals/`)
 
 | Visual | File | Description & Capabilities |
 |---|---|---|
-| 📊 **Bar Chart Plus** | [`visuals/barChartPlus.pbiviz`](visuals/barChartPlus.pbiviz) | Clustered bar chart with enhanced category analytics, dynamic thresholds, and rich interactive filtering. |
+| 📊 **Bar Chart Plus** | [`visuals/barChartPlus.pbiviz`](visuals/barChartPlus.pbiviz) | Multi-mode executive bar chart (Vertical Columns, Horizontal Bars, Lollipop, 80/20 Pareto Curve) with target markers, average lines, dynamic sorting, and full cross-filtering. |
+| 📈 **Line & Area Chart Plus** | [`visuals/lineChartPlus.pbiviz`](visuals/lineChartPlus.pbiviz) | Interactive trend visual (Gradient Area, Smooth Spline, Linear, Stepped) with linear regression forecast trendline, target comparison line, and peak callouts. |
+| 🍩 **Donut & Pie Chart Plus** | [`visuals/donutChartPlus.pbiviz`](visuals/donutChartPlus.pbiviz) | Proportional composition chart (Donut Ring, Classic Pie, Nightingale Rose, Half-Gauge Arc) with dynamic center KPI callout, slice pull-out, and interactive share legend. |
+| 📋 **KPI Scorecard & Matrix Plus** | [`visuals/kpiMatrixPlus.pbiviz`](visuals/kpiMatrixPlus.pbiviz) | Executive KPI summary cards paired with an interactive sortable data matrix featuring inline sparkbars and target/average variance badges. |
 | 🫧 **Bubble Physics** | [`visuals/bubblePhysics.pbiviz`](visuals/bubblePhysics.pbiviz) | Force-directed collision physics where bubbles cluster by category. Supports dragging, spring burst animations, and cross-filtering. |
 | 🐠 **Data Aquarium (3D)** | [`visuals/dataAquarium.pbiviz`](visuals/dataAquarium.pbiviz) | 3D WebGL boids flocking simulation where data rows act as wandering oceanic creatures reacting to metric currents. |
 | 🏙️ **Data City (3D)** | [`visuals/dataCity.pbiviz`](visuals/dataCity.pbiviz) | 3D WebGL metropolis. Categories form districts and data rows become skyscrapers with height/footprint driven by measures. Supports full camera orbit/pan. |
@@ -25,6 +28,7 @@ All visuals are pre-compiled and packaged as standalone `.pbiviz` files ready to
 | 🧱 **Physics Blocks** | [`visuals/physicsBlocks.pbiviz`](visuals/physicsBlocks.pbiviz) | 2D Matter.js physics engine dropping data rows as interactive falling blocks with gravity, restitution, and collision. |
 | 📉 **Dual-Month Savings Web** | [`visuals/savingsDelta.pbiviz`](visuals/savingsDelta.pbiviz) | Waterfall delta and radial comparison visual comparing last month vs this month savings across category tiers. |
 | 🪐 **Solar System (3D)** | [`visuals/solarSystem.pbiviz`](visuals/solarSystem.pbiviz) | 3D orbital gravity model with categories as central suns/planets and individual data points as orbiting satellites. |
+
 
 ---
 
