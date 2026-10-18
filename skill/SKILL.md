@@ -433,19 +433,28 @@ In enterprise data analytics scenarios (e.g., Orange Business OINIS last-mile of
 | **Contract Orbit Radar (`solarSystem`)** | Displays contracts orbiting carrier hubs; distance and color shift toward red as auto-renewal / contract expiry dates approach. | Planet: `Carrier`<br>Moon: `Circuit_ID`<br>Radius: `MRC` |
 | **Last-Mile Globe 3D (`hologramGlobe`)** | Visualizes geographic spread of off-net circuits with arcs connecting PoPs to customer endpoints colored by circuit status (Active, Pending, Upgrade). | Source Lat/Long: PoP<br>Dest Lat/Long: Site |
 
-### 8.1 Carbon Footprint & ESG Analytics Suite (`carbon-visuals/`)
+### 8.1 Carbon Footprint & Per-Circuit-Type Attribution Suite (`carbon-visuals/`)
 
-Dedicated domain visualizers for telecom circuit emissions and supplier decarbonization:
+Dedicated domain visualizers for telecom circuit emissions, multi-carrier per country benchmarking, and dynamic per-circuit-type carbon attribution:
 
-| Visual | ESG Analytics Focus | Key Mechanics & Mappings |
+#### Data Schema & Attribution Formula
+- **Granularity:** Each row represents `Country` + `Carrier` (+ `Year` + `Region`). Multiple carriers can operate inside the same country.
+- **Total Carbon (`carbon`):** Total carbon emission ($\text{CO}_2\text{e}$) for that `Country + Carrier` row.
+- **Dynamic Circuit Type Columns (`circuitTypes`, `max: 100`):** Wide-format connection count columns (e.g., `Ethernet = 3`, `Internet Access = 2`, `MPLS = 1`).
+- **Row-Level Per-Circuit-Type Carbon Attribution (`shared/src/data.ts`):**
+  $$N_{\text{row}} = \sum_{t} c_{\text{row}, t}, \qquad I_{\text{row}} = \frac{\text{Carbon}_{\text{row}}}{N_{\text{row}}}, \qquad E_{\text{row}, t} = \text{Carbon}_{\text{row}} \times \frac{c_{\text{row}, t}}{N_{\text{row}}}$$
+
+| Visual | ESG & Telecom Analytics Focus | Key Mechanics & Mappings |
 |---|---|---|
-| **Carbon Atlas (`carbonAtlas`)** | Global geographic emission heatmap with country plumes. | Mercator map, emission density scales, graticule lines, interactive year playback timeline (`Country`, `Carbon Emission`, `Year`). |
-| **Carrier Constellation (`carrierConstellation`)** | Supplier carbon gravitational network. | Force-directed graph with carrier gravity nodes linking multi-country operations (`Country`, `Carrier`, `Carbon Emission`). |
-| **Circuit Flowers (`circuitFlowers`)** | Glyphic multi-metric efficiency composition. | Flower petals representing distinct circuit types (`Ethernet`, `MPLS`, `DIA`) and center radius representing carbon intensity. |
-| **Efficiency Orbit (`efficiencyOrbit`)** | Quadrant efficiency scatter with motion trails. | Plots Circuit Volume (X) vs Carbon (Y) across reporting years with historical orbital trails. |
-| **Emission Ribbons (`emissionRibbons`)** | Bump chart for ranking trajectory shifts. | Tracks year-over-year climb/fall of highest emitting countries or carriers over time. |
-| **Carbon Flow (`carbonFlow`)** | Alluvial Sankey distribution flow. | Traces footprint allocation across hierarchy: Region &rarr; Country &rarr; Telecom Carrier. |
-| **Carbon Globe 3D (`carbonGlobe3d`)** | Spherical 3D WebGL Earth visualization. | Extruded carbon pillar columns on landmass coordinates with inter-country carrier connection arcs. |
+| **Circuit Attribution Matrix (`circuitAttribution`)** | Per-circuit-type carbon attribution & intensity across countries/carriers. | 3 interactive views: Stacked Attribution Bars, Country $\times$ Circuit Heatmap Matrix, and Per-Circuit Deep-Dive Cards (`Country`, `Carrier`, `Carbon Emission`, `Circuit Types`). |
+| **Country & Carrier Scorecard (`carrierScorecard`)** | Multi-carrier per country benchmarking & `A+`–`F` efficiency grading. | Compares multiple carriers inside each country with circuit mix bars, intensity grades, and global/regional rollups. |
+| **Carbon Atlas (`carbonAtlas`)** | Global geographic emission map with donut attribution rings. | Mercator map, country plumes wrapped in Circuit Type or Carrier Share donut rings, inter-country shared carrier arcs, HUD legend, and year timeline. |
+| **Carrier Constellation (`carrierConstellation`)** | Bipartite (`Country ↔ Carrier`) & Tripartite (`+ Circuit Type`) network. | Force-directed graph with draggable nodes, circuit-ring carrier hubs, and dominant-circuit colored links. |
+| **Circuit Flowers (`circuitFlowers`)** | Botanical glyph matrix of circuit mixes & carbon intensity. | Group by `Country`, `Carrier`, or `Country + Carrier`; organic leaf petals sized by Attributed $\text{CO}_2\text{e}$ or Connection Count; core colored by `CO2e/conn`. |
+| **Efficiency Orbit (`efficiencyOrbit`)** | Quadrant scatter (`Connections` vs `Carbon`) with benchmark curve. | Plots Country, Carrier, Country+Carrier, or Circuit Type bubbles with outer circuit-mix rings, global average intensity line, and historical trails. |
+| **Emission Ribbons (`emissionRibbons`)** | Multi-year ranking bump chart & single-year 3-stage slopegraph. | Tracks rank shifts of Countries, Carriers, Country+Carrier pairs, or Circuit Types across years or across `Connections Rank → Carbon Rank → Intensity Rank`. |
+| **Carbon Flow (`carbonFlow`)** | 4-Stage Alluvial Sankey (`Region → Country → Carrier → Circuit Type`). | Traces carbon footprint and connection volume across all 4 hierarchy levels with stacked non-overlapping ribbons. |
+| **Carbon Globe 3D (`carbonGlobe3d`)** | Spherical 3D WebGL Earth with extruded carbon pillars. | Three.js holographic globe with color mode switcher (`Carbon/Conn`, `Dominant Circuit`, `Total Carbon`), 3D carrier arcs, and HUD attribution panel. |
 
 ---
 
@@ -460,4 +469,5 @@ npx pbiviz package --certification-fix
 npm run build:all
 ```
 All packaged `.pbiviz` files are generated in `dist/` ready for direct import into Power BI Desktop or Service.
+
 
