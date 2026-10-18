@@ -361,6 +361,30 @@ export class Visual implements IVisual {
   svgSelection.call(zoom);
   ```
 
+### 4.4 Dual-Month Savings Web (`savingsDelta`)
+- **Concept:** Analyzes recurring financial deltas (e.g., last month vs this month savings) grouped by categories with directional color grading (positive vs negative variances).
+- **Variance Tracking:** Compute baseline delta metrics:
+  ```typescript
+  const delta = thisMonth - lastMonth;
+  const pctChange = lastMonth !== 0 ? (delta / lastMonth) * 100 : 0;
+  const isPositive = delta >= 0;
+  ```
+
+### 4.5 Hologram Globe 3D (`hologramGlobe`) & Solar System (`solarSystem`)
+- **Concept:** Three.js orbital models using procedural geometries and latitude/longitude spherical coordinates:
+  ```typescript
+  // Convert spherical coordinates (lat, lon, radius) to Cartesian (x, y, z)
+  const phi = (90 - lat) * (Math.PI / 180);
+  const theta = (lon + 180) * (Math.PI / 180);
+  const x = -(radius * Math.sin(phi) * Math.cos(theta));
+  const z = radius * Math.sin(phi) * Math.sin(theta);
+  const y = radius * Math.cos(phi);
+  ```
+- **Disposal Guarantee:** Always traverse meshes, dispose geometries and materials on visual destruction or re-render.
+
+### 4.6 Physics Blocks (`physicsBlocks`)
+- **Concept:** 2D rigid-body simulation using Matter.js engine. Rows fall under gravity and stack interactively inside bounded canvas containers.
+
 ---
 
 ## 5. Comprehensive Bug & Error Catalog
